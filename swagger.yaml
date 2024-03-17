@@ -3,33 +3,65 @@ info:
   title: Swagger Petstore - OpenAPI 3.0
   description: Commentator API
   version: 0.0.1
-
+servers:
+  - url: https://commentator-boot-app.azurewebsites.net
+    description: Commentator dev server
 tags:
   - name: user
     description: Operations about user
 paths:
-  /users:
-    get:
-      tags:
-        - user
-      summary: Fetch all users
-      operationId: getUsers
-      responses:
-        200:
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/UserResponse'
+  /v1/users:
     post:
       tags:
         - user
-      summary: Create a user
+      summary: Create user
       operationId: createUser
       requestBody:
-        description: Created user object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+      responses:
+        201:
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+  /v1/users:validate-username:
+    post:
+      tags:
+        - user
+      summary: Validate username uniquiness
+      operationId: validateUsername
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserValidationRequest'
+      responses:
+        200:
+          description: Validation results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserValidationResponse'
+  /v1/users/{userId}:
+    put:
+      tags:
+        - user
+      summary: Update user
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: string
+          required: true
+          description: User id
+      operationId: updateUser
+      requestBody:
         required: true
         content:
           application/json:
@@ -37,7 +69,7 @@ paths:
               $ref: '#/components/schemas/UserRequest'
       responses:
         200:
-          description: successful operation
+          description: User updated
           content:
             application/json:
               schema:
@@ -48,7 +80,6 @@ components:
       type: object
       required:
         - username
-        - email
       properties:
         username:
           type: string
@@ -62,17 +93,19 @@ components:
         email:
           type: string
           example: john@email.com
+        description:
+          type: string
+          example: About Me
     UserResponse:
       type: object
       required:
         - id
         - username
-        - email
       properties:
         id:
           type: string
           format: uuid
-          example: 'LSALALLSAKDALKlaksdlKAS'
+          example: LSALALLSAKDALKlaksdlKAS
         username:
           type: string
           example: theUser
@@ -85,3 +118,22 @@ components:
         email:
           type: string
           example: john@email.com
+        description:
+          type: string
+          example: About Me
+    UserValidationRequest:
+      type: object
+      required:
+        - username
+      properties:
+        username:
+          type: string
+          example: myusername22
+    UserValidationResponse:
+      type: object
+      required:
+        - isValid
+      properties:
+        isValid:
+          type: boolean
+          example: true
