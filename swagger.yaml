@@ -47,7 +47,7 @@ paths:
     post:
       tags:
         - user
-      summary: Validate username uniquiness
+      summary: Validate username uniqueness
       operationId: validateUsername
       requestBody:
         required: true
