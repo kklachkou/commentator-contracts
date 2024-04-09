@@ -231,4 +231,4 @@ components:
       properties:
         isValid:
           type: boolean
-          example: true
+          example: true 
