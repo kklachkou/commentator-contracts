@@ -10,6 +10,25 @@ tags:
   - name: user
     description: Operations about user
 paths:
+  /v1/auth:
+    post:
+      tags:
+        - auth
+      summary: Authorize user
+      operationId: authUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthRequest'
+      responses:
+        201:
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
   /v1/users:
     get:
       tags:
@@ -111,6 +130,47 @@ paths:
                 $ref: '#/components/schemas/UserResponse'
 components:
   schemas:
+    AuthRequest:
+      type: object
+      required:
+        - source
+        - token
+      properties:
+        source:
+          type: string
+          example: APPLE
+        token:
+          type: string
+          example: SADFMWFKALFMSLKDFNLKSDF
+    AuthResponse:
+      type: object
+      required:
+        - id
+        - username
+        - authCode
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: LSALALLSAKDALKlaksdlKAS
+        username:
+          type: string
+          example: theUser
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: James
+        email:
+          type: string
+          example: john@email.com
+        description:
+          type: string
+          example: About Me
+        authCode:
+          type: string
+          example: LKSDJFLKSJF
     UserRequest:
       type: object
       required:
