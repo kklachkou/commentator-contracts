@@ -196,7 +196,7 @@ components:
       properties:
         username:
           type: string
-          example: theUser
+          example: TheUser
         firstName:
           type: string
           example: John
@@ -221,7 +221,7 @@ components:
           example: LSALALLSAKDALKlaksdlKAS
         username:
           type: string
-          example: theUser
+          example: TheUser
         firstName:
           type: string
           example: John
@@ -260,7 +260,8 @@ components:
           properties:
             id:
               type: string
-              example: 'barbie'
+              format: uuid
+              example: 'ASDKLFJSDLFKJSDLKFJSLD'
             name:
               type: string
               example: 'Barbie'
