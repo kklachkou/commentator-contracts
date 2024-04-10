@@ -159,28 +159,12 @@ components:
       type: object
       required:
         - id
-        - username
         - authCode
       properties:
         id:
           type: string
           format: uuid
           example: LSALALLSAKDALKlaksdlKAS
-        username:
-          type: string
-          example: theUser
-        firstName:
-          type: string
-          example: John
-        lastName:
-          type: string
-          example: James
-        email:
-          type: string
-          example: john@email.com
-        description:
-          type: string
-          example: About Me
         authCode:
           type: string
           example: LKSDJFLKSJF
