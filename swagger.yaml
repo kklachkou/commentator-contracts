@@ -15,14 +15,35 @@ paths:
         tags:
           - theme
         summary: Fetch all themes
-        operationId: themeList
+        operationId: fetchThemes
         responses:
           200:
-            description: Themes getted
+            description: Themes fetched
             content:
               application/json:
                 schema:
-                  $ref: '#/components/schemas/ThemesResponse'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ThemeResponse'
+  /v1/themes/{themeId}:
+      get:
+        tags:
+          - theme
+        summary: Fetch theme by id
+        parameters:
+        - in: path
+          name: themeId
+          schema:
+            type: string
+          required: true
+        operationId: fetchTheme
+        responses:
+          200:
+            description: Theme fetched
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ThemeResponse'
   /v1/auth:
     post:
       tags:
@@ -36,8 +57,8 @@ paths:
             schema:
               $ref: '#/components/schemas/AuthRequest'
       responses:
-        201:
-          description: User created
+        200:
+          description: User authorized
           content:
             application/json:
               schema:
@@ -229,35 +250,23 @@ components:
         isValid:
           type: boolean
           example: true
-    ThemesResponse:      
+    ThemeResponse:      
           type: object      
           required:
-            - data      
+            - id
+            - name
+            - day_color
+            - night_color    
           properties:
-            data:
-              type: array
-              items:
-                type: object
-                required:
-                  - id
-                  - name
-                  - day_color
-                  - night_color
-                properties:
-                  id:
-                    type: string
-                  name:
-                    type: string
-                  day_color:
-                    type: string
-                  night_color:
-                    type: string
-              example: 
-                - id: 'barbie'
-                  name: 'Barbie'
-                  day_color: '#FF57DA'
-                  night_color: '#D900A9'
-                - id: 'ocean'
-                  name: 'Ocean Fizz'
-                  day_color: '#0077BE'
-                  night_color: '#003C64'
+            id:
+              type: string
+              example: 'barbie'
+            name:
+              type: string
+              example: 'Barbie'
+            day_color:
+              type: string
+              example: '#FF57DA'
+            night_color:
+              type: string
+              example: '#D900A9'
