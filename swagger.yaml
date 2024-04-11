@@ -149,6 +149,8 @@ paths:
           required: true
           description: User id
       operationId: updateUser
+      security:
+        - BearerAuth: []
       requestBody:
         required: true
         content:
@@ -163,6 +165,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/UserResponse'
 components:
+  securitySchemes:
+      BearerAuth:
+        type: http
+        scheme: bearer
+        bearerFormat: uuid
   schemas:
     AuthRequest:
       type: object
