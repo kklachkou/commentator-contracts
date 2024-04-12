@@ -148,6 +148,12 @@ paths:
             type: string
           required: true
           description: User id
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
+          description: Authorization header
       operationId: updateUser
       security:
         - BearerAuth: []
