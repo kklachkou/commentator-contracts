@@ -215,6 +215,7 @@ components:
           example: About Me
         themeId:
           type: string
+          format: uuid
           example: SDKLFJKSLDFJLSKDJFL
     UserResponse:
       type: object
