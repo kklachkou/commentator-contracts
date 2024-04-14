@@ -186,11 +186,11 @@ components:
         - userId
         - token
       properties:
-        id:
+        userId:
           type: string
           format: uuid
           example: LSALALLSAKDALKlaksdlKAS
-        authCode:
+        token:
           type: string
           example: LKSDJFLKSJF
     UserRequest:
