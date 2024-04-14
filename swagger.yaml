@@ -7,43 +7,10 @@ servers:
   - url: https://commentator-boot-app.azurewebsites.net
     description: Commentator dev server
 tags:
+  - name: auth
   - name: user
-    description: Operations about user
+  - name: theme
 paths:
-  /v1/themes:
-      get:
-        tags:
-          - theme
-        summary: Fetch all themes
-        operationId: fetchThemes
-        responses:
-          200:
-            description: Themes fetched
-            content:
-              application/json:
-                schema:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/ThemeResponse'
-  /v1/themes/{themeId}:
-      get:
-        tags:
-          - theme
-        summary: Fetch theme by id
-        parameters:
-        - in: path
-          name: themeId
-          schema:
-            type: string
-          required: true
-        operationId: fetchTheme
-        responses:
-          200:
-            description: Theme fetched
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/ThemeResponse'
   /v1/auth:
     post:
       tags:
@@ -78,43 +45,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/UserResponse'
-    post:
-      tags:
-        - user
-      summary: Create user
-      operationId: createUser
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UserRequest'
-      responses:
-        201:
-          description: User created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserResponse'
-  /v1/users:validate-username:
-    post:
-      tags:
-        - user
-      summary: Validate username uniqueness
-      operationId: validateUsername
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UserValidationRequest'
-      responses:
-        200:
-          description: Validation results
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserValidationResponse'
   /v1/users/{userId}:
     get:
       tags:
@@ -127,6 +57,14 @@ paths:
             type: string
           required: true
           description: User id
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
+          description: Authorization header
+      security:
+        - BearerAuth: []
       operationId: fetchUser
       responses:
         200:
@@ -154,9 +92,9 @@ paths:
             type: string
           required: true
           description: Authorization header
-      operationId: updateUser
       security:
         - BearerAuth: []
+      operationId: updateUser
       requestBody:
         required: true
         content:
@@ -170,6 +108,59 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserResponse'
+  /v1/users:validate-username:
+    post:
+      tags:
+        - user
+      summary: Validate username uniqueness
+      operationId: validateUsername
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserValidationRequest'
+      responses:
+        200:
+          description: Validation results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserValidationResponse'
+  /v1/themes:
+    get:
+      tags:
+        - theme
+      summary: Fetch all themes
+      operationId: fetchThemes
+      responses:
+        200:
+          description: Themes fetched
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                    $ref: '#/components/schemas/ThemeResponse'
+  /v1/themes/{themeId}:
+    get:
+      tags:
+        - theme
+      summary: Fetch theme by id
+      parameters:
+      - in: path
+        name: themeId
+        schema:
+          type: string
+        required: true
+      operationId: fetchTheme
+      responses:
+        200:
+          description: Theme fetched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThemeResponse'
 components:
   securitySchemes:
       BearerAuth:
@@ -192,8 +183,8 @@ components:
     AuthResponse:
       type: object
       required:
-        - id
-        - authCode
+        - userId
+        - token
       properties:
         id:
           type: string
@@ -222,6 +213,9 @@ components:
         description:
           type: string
           example: About Me
+        themeId:
+          type: string
+          example: SDKLFJKSLDFJLSKDJFL
     UserResponse:
       type: object
       required:
@@ -247,6 +241,9 @@ components:
         description:
           type: string
           example: About Me
+        themeId:
+          type: string
+          example: SDKLFJKSLDFJLSKDJFL
     UserValidationRequest:
       type: object
       required:
