@@ -36,6 +36,19 @@ paths:
         - user
       summary: Fetch all users
       operationId: fetchUsers
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
+          description: Authorization header
+        - in: header
+          name: X-USER-ID
+          schema:
+            type: string
+          required: true
+          description: Authorization header
       responses:
         200:
           description: List of all users
@@ -63,8 +76,12 @@ paths:
             type: string
           required: true
           description: Authorization header
-      security:
-        - BearerAuth: []
+        - in: header
+          name: X-USER-ID
+          schema:
+            type: string
+          required: true
+          description: Authorization header
       operationId: fetchUser
       responses:
         200:
@@ -92,8 +109,12 @@ paths:
             type: string
           required: true
           description: Authorization header
-      security:
-        - BearerAuth: []
+        - in: header
+          name: X-USER-ID
+          schema:
+            type: string
+          required: true
+          description: Authorization header
       operationId: updateUser
       requestBody:
         required: true
@@ -114,6 +135,19 @@ paths:
         - user
       summary: Validate username uniqueness
       operationId: validateUsername
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
+          description: Authorization header
+        - in: header
+          name: X-USER-ID
+          schema:
+            type: string
+          required: true
+          description: Authorization header
       requestBody:
         required: true
         content:
@@ -133,6 +167,19 @@ paths:
         - theme
       summary: Fetch all themes
       operationId: fetchThemes
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
+          description: Authorization header
+        - in: header
+          name: X-USER-ID
+          schema:
+            type: string
+          required: true
+          description: Authorization header
       responses:
         200:
           description: Themes fetched
@@ -153,6 +200,18 @@ paths:
         schema:
           type: string
         required: true
+      - in: header
+        name: Authorization
+        schema:
+          type: string
+        required: true
+        description: Authorization header
+      - in: header
+        name: X-USER-ID
+        schema:
+          type: string
+        required: true
+        description: Authorization header
       operationId: fetchTheme
       responses:
         200:
