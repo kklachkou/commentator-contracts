@@ -59,7 +59,7 @@ paths:
               $ref: '#/components/schemas/PageRequest'
       responses:
         201:
-          description: User authorized
+          description: Page created
           content:
             application/json:
               schema:
