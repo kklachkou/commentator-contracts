@@ -8,6 +8,7 @@ servers:
     description: Commentator dev server
 tags:
   - name: auth
+  - name: pages
   - name: user
   - name: theme
 paths:
@@ -30,6 +31,59 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AuthResponse'
+  /v1/pages:
+    get:
+      tags:
+        - pages
+      summary: Fetch all pages
+      operationId: fetchPages
+      responses:
+        200:
+          description: List of all pages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PageResponse'
+    post:
+      tags:
+        - pages
+      summary: Create page
+      operationId: createPage
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PageRequest'
+      responses:
+        201:
+          description: User authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageResponse'
+  /v1/pages/{pageId}:
+    get:
+      tags:
+        - pages
+      summary: Fetch page
+      operationId: fetchPage
+      parameters:
+        - in: path
+          name: pageId
+          schema:
+            type: string
+          required: true
+          description: Page id
+      responses:
+        200:
+          description: Page details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageResponse'
   /v1/users:
     get:
       tags:
@@ -252,6 +306,41 @@ components:
         token:
           type: string
           example: LKSDJFLKSJF
+    PageRequest:
+      type: object
+      required:
+        - uri
+      properties:
+        uri:
+          type: string
+          example: https://stackoverflow.com/
+    PageResponse:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: asASFSFAKDALKlaksdlKAS
+        uri:
+          type: string
+          example: https://stackoverflow.com/
+        name:
+          type: string
+          example: Stack Overflow
+        title:
+          type: string
+          example: Stack Overflow - Where Developers Learn, Share, & Build Careers
+        description:
+          type: string
+          example: Stack Overflow | The World's Largest Online Community for Developers
+        image:
+          type: string
+          example: https://cdn.sstatic.net/Sites/stackoverflow/Img/apple-touch-icon@2.png?v=73d79a89bded
+        shortcutIcon:
+          type: string
+          example: https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico?v=ec617d715196
     UserRequest:
       type: object
       required:
