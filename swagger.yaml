@@ -31,6 +31,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AuthResponse'
+  /v1/pages/{pageId}:
+    get:
+      tags:
+        - pages
+      summary: Fetch page
+      operationId: fetchPage
+      parameters:
+        - in: path
+          name: pageId
+          schema:
+            type: string
+          required: true
+          description: Page id
+      responses:
+        200:
+          description: Page details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageResponse'
   /v1/pages:
     get:
       tags:
@@ -60,26 +80,6 @@ paths:
       responses:
         201:
           description: Page created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PageResponse'
-  /v1/pages/{pageId}:
-    get:
-      tags:
-        - pages
-      summary: Fetch page
-      operationId: fetchPage
-      parameters:
-        - in: path
-          name: pageId
-          schema:
-            type: string
-          required: true
-          description: Page id
-      responses:
-        200:
-          description: Page details
           content:
             application/json:
               schema:
