@@ -84,6 +84,76 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PageResponse'
+  /v1/pages/{pageId}/comments:
+    get:
+      tags:
+        - pages
+      summary: Fetch page comments
+      operationId: fetchPageComments
+      parameters:
+        - in: path
+          name: pageId
+          schema:
+            type: string
+          required: true
+          description: Page id
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
+          description: Authorization header
+        - in: header
+          name: X-USER-ID
+          schema:
+            type: string
+          required: true
+          description: Authorization header
+      responses:
+        '200':
+          description: List of page comments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PageCommentResponse'
+    post:
+      tags:
+        - pages
+      summary: Create a comment on a page
+      operationId: addPageComment
+      parameters:
+        - name: pageId
+          in: path
+          required: true
+          schema:
+            type: string
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
+          description: Authorization header
+        - in: header
+          name: X-USER-ID
+          schema:
+            type: string
+          required: true
+          description: Authorization header
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PageCommentRequest'
+      responses:
+        '200':
+          description: Comment created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageCommentResponse'
   /v1/users:
     get:
       tags:
@@ -183,6 +253,40 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserResponse'
+  /v1/users/{userId}/comments:
+    get:
+      tags:
+        - user
+      summary: Fetch user comments
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: string
+          required: true
+          description: User id
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
+          description: Authorization header
+        - in: header
+          name: X-USER-ID
+          schema:
+            type: string
+          required: true
+          description: Authorization header
+      operationId: fetchUserComments
+      responses:
+        200:
+          description: List of all user comments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserCommentResponse'
   /v1/users:validate-username:
     post:
       tags:
@@ -431,3 +535,69 @@ components:
             nightColor:
               type: string
               example: '#D900A9'
+    PageCommentRequest:
+      type: object
+      properties:
+        text:
+          type: string
+          example: "my very first comment"
+        userId:
+          type: string
+          format: uuid
+          example: "useridasdasd"
+    PageCommentResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 'KJKJSFKJKSJDAAGJSDJH'
+        pageId:
+          type: string
+          format: uuid
+          example: 'ASLDKHJLKASJDAAGJSDJH'
+        text:
+          type: string
+          example: "my comment"
+        createdAt:
+          type: string
+          format: date-time
+          example: "2023-06-28T14:30:00Z"
+        updatedAt:
+          type: string
+          format: date-time
+          example: "2023-07-28T14:30:00Z"
+        status:
+          enum:
+            - active
+            - inactive
+          example: active
+        user:
+          $ref: '#/components/schemas/UserResponse'
+    UserCommentResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 'KJKJSFKJKSJDAAGJSDJH'
+        pageId:
+          type: string
+          format: uuid
+          example: 'ASLDKHJLKASJDAAGJSDJH'
+        text:
+          type: string
+          example: "my comment"
+        createdAt:
+          type: string
+          format: date-time
+          example: "2023-06-28T14:30:00Z"
+        updatedAt:
+          type: string
+          format: date-time
+          example: "2023-07-28T14:30:00Z"
+        status:
+          enum:
+            - active
+            - inactive
+          example: active
