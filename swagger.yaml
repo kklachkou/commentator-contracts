@@ -487,7 +487,7 @@ components:
         - name
         - title
         - isCommented
-        - stats
+        - commentsNumber
         - comments
       properties:
         id:
@@ -515,14 +515,9 @@ components:
         isCommented:
           type: boolean
           example: true
-        stats:
-          type: object
-          required:
-            - commentsNumber
-          properties:
-            commentsNumber:
-              type: integer
-              example: 123
+        commentsNumber:
+          type: integer
+          example: 123
         comments:
           type: array
           items:
