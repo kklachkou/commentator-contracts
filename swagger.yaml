@@ -287,6 +287,40 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/UserCommentResponse'
+  /v1/users/{userId}/feed:
+    get:
+      tags:
+        - user
+      summary: Fetch user feed
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: string
+          required: true
+          description: User id
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
+          description: Authorization header
+        - in: header
+          name: X-USER-ID
+          schema:
+            type: string
+          required: true
+          description: Authorization header
+      operationId: fetchUserFeed
+      responses:
+        200:
+          description: User's feed
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserFeedResponse'
   /v1/users:validate-username:
     post:
       tags:
@@ -445,6 +479,54 @@ components:
         shortcutIcon:
           type: string
           example: https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico?v=ec617d715196
+    UserFeedResponse:
+      type: object
+      required:
+        - id
+        - uri
+        - name
+        - title
+        - isCommented
+        - stats
+        - comments
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: asASFSFAKDALKlaksdlKAS
+        uri:
+          type: string
+          example: https://stackoverflow.com/
+        name:
+          type: string
+          example: Stack Overflow
+        title:
+          type: string
+          example: Stack Overflow - Where Developers Learn, Share, & Build Careers
+        description:
+          type: string
+          example: Stack Overflow | The World's Largest Online Community for Developers
+        image:
+          type: string
+          example: https://cdn.sstatic.net/Sites/stackoverflow/Img/apple-touch-icon@2.png?v=73d79a89bded
+        shortcutIcon:
+          type: string
+          example: https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico?v=ec617d715196
+        isCommented:
+          type: boolean
+          example: true
+        stats:
+          type: object
+          required:
+            - commentsNumber
+          properties:
+            commentsNumber:
+              type: integer
+              example: 123
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserCommentResponse'
     UserRequest:
       type: object
       required:
