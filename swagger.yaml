@@ -530,22 +530,16 @@ components:
         username:
           type: string
           example: TheUser
-        firstName:
+        fullname:
           type: string
           example: John
-        lastName:
-          type: string
-          example: James
-        email:
-          type: string
-          example: john@email.com
         description:
           type: string
           example: About Me
         themeId:
           type: string
           format: uuid
-          example: SDKLFJKSLDFJLSKDJFL
+          example: c466eb4c-452a-4fc5-9b93-1577e27ac9b4
     UserResponse:
       type: object
       required:
@@ -559,12 +553,9 @@ components:
         username:
           type: string
           example: TheUser
-        firstName:
+        fullname:
           type: string
           example: John
-        lastName:
-          type: string
-          example: James
         email:
           type: string
           example: john@email.com
@@ -574,7 +565,7 @@ components:
         themeId:
           type: string
           format: uuid
-          example: SDKLFJKSLDFJLSKDJFL
+          example: c466eb4c-452a-4fc5-9b93-1577e27ac9b4
     UserValidationRequest:
       type: object
       required:
