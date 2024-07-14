@@ -430,7 +430,7 @@ components:
           example: APPLE
         token:
           type: string
-          example: SADFMWFKALFMSLKDFNLKSDF
+          example: 3935143e-ece5-4af5-8cc6-d2c0f802d35c
     AuthResponse:
       type: object
       required:
@@ -440,10 +440,10 @@ components:
         userId:
           type: string
           format: uuid
-          example: LSALALLSAKDALKlaksdlKAS
+          example: 3935143e-ece5-4af5-8cc6-d2c0f802d35b
         token:
           type: string
-          example: LKSDJFLKSJF
+          example: 3935143e-ece5-4af5-8cc6-d2c0f802d35c
     PageRequest:
       type: object
       required:
@@ -460,7 +460,7 @@ components:
         id:
           type: string
           format: uuid
-          example: asASFSFAKDALKlaksdlKAS
+          example: 5defde3a-4ae1-4cb2-ac7c-9b6459bbc175
         uri:
           type: string
           example: https://stackoverflow.com/
@@ -493,7 +493,7 @@ components:
         id:
           type: string
           format: uuid
-          example: asASFSFAKDALKlaksdlKAS
+          example: 5defde3a-4ae1-4cb2-ac7c-9b6459bbc175
         uri:
           type: string
           example: https://stackoverflow.com/
@@ -549,7 +549,7 @@ components:
         id:
           type: string
           format: uuid
-          example: LSALALLSAKDALKlaksdlKAS
+          example: 3935143e-ece5-4af5-8cc6-d2c0f802d35b
         username:
           type: string
           example: TheUser
@@ -593,7 +593,7 @@ components:
             id:
               type: string
               format: uuid
-              example: 'ASDKLFJSDLFKJSDLKFJSLD'
+              example: c466eb4c-452a-4fc5-9b93-1577e27ac9b4
             name:
               type: string
               example: 'Barbie'
@@ -612,18 +612,18 @@ components:
         userId:
           type: string
           format: uuid
-          example: "useridasdasd"
+          example: 684f5591-80d0-4a04-b532-4e9a0c1215a7
     PageCommentResponse:
       type: object
       properties:
         id:
           type: string
           format: uuid
-          example: 'KJKJSFKJKSJDAAGJSDJH'
+          example: 0857f158-efd8-487c-99d4-9be30dbd9e67
         pageId:
           type: string
           format: uuid
-          example: 'ASLDKHJLKASJDAAGJSDJH'
+          example: dbcc927c-9423-43b5-8abb-047655dbd408
         text:
           type: string
           example: "my comment"
@@ -648,11 +648,11 @@ components:
         id:
           type: string
           format: uuid
-          example: 'KJKJSFKJKSJDAAGJSDJH'
+          example: 0857f158-efd8-487c-99d4-9be30dbd9e67
         pageId:
           type: string
           format: uuid
-          example: 'ASLDKHJLKASJDAAGJSDJH'
+          example: dbcc927c-9423-43b5-8abb-047655dbd408
         text:
           type: string
           example: "my comment"
