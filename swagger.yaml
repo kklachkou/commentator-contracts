@@ -646,6 +646,10 @@ components:
           example: active
         user:
           $ref: '#/components/schemas/UserResponse'
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/PageCommentResponse'
     UserCommentResponse:
       type: object
       properties:
