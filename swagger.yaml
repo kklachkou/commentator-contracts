@@ -606,13 +606,17 @@ components:
     PageCommentRequest:
       type: object
       properties:
-        text:
+        parentId:
           type: string
-          example: "my very first comment"
+          format: uuid
+          example: 0857f158-efd8-487c-99d4-9be30dbd9e67
         userId:
           type: string
           format: uuid
           example: 684f5591-80d0-4a04-b532-4e9a0c1215a7
+        text:
+          type: string
+          example: "my very first comment"
     PageCommentResponse:
       type: object
       properties:
