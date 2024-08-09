@@ -677,3 +677,5 @@ components:
             - active
             - inactive
           example: active
+        user:
+          $ref: '#/components/schemas/UserResponse'
